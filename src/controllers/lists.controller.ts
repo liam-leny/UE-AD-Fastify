@@ -15,11 +15,7 @@ export async function listLists(request: FastifyRequest, reply: FastifyReply) {
 export async function addList(request: FastifyRequest, reply: FastifyReply) {
   const list = request.body as ITodoList;
 
-  if (!list || !list.id || !list.description) {
-    return reply.badRequest("Invalid list data.");
-  }
-
-  const result = await this.level.listsdb.put(
+    const result = await this.level.listsdb.put(
     list.id.toString(),
     JSON.stringify(list)
   );
