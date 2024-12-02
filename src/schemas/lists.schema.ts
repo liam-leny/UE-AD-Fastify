@@ -82,7 +82,7 @@ export const updateListSchema = {
 export const addItemSchema = {
   body: {
     type: "object",
-    required: ["id", "state", "description"],
+    required: ["id", "description"],
     properties: {
       id: { type: "integer" },
       state: {
@@ -118,7 +118,7 @@ export const addItemSchema = {
 export const updateItemSchema = {
   body: {
     type: "object",
-    required: ["state", "description"], // Ces champs sont requis dans le corps de la requête
+    required: ["state", "description"], 
     properties: {
       state: {
         type: "string",
@@ -130,10 +130,10 @@ export const updateItemSchema = {
   },
   params: {
     type: "object",
-    required: ["id", "itemId"], // Les paramètres `id` et `itemId` sont requis
+    required: ["id", "itemId"],
     properties: {
       id: { type: "integer" },
-      itemId: { type: "string" }, // Les IDs des items peuvent être des chaînes
+      itemId: { type: "string" }, 
     },
   },
   response: {
@@ -161,10 +161,10 @@ export const updateItemSchema = {
 export const deleteItemSchema = {
   params: {
     type: "object",
-    required: ["id", "itemId"], // Les paramètres `id` et `itemId` sont requis
+    required: ["id", "itemId"], 
     properties: {
       id: { type: "integer" },
-      itemId: { type: "string" }, // Les IDs des items peuvent être des chaînes
+      itemId: { type: "string" }, 
     },
   },
   response: {
@@ -172,6 +172,42 @@ export const deleteItemSchema = {
       type: "object",
       properties: {
         message: { type: "string" },
+      },
+    },
+  },
+};
+
+export const markListAsDoneSchema = {
+  params: {
+    type: "object",
+    required: ["id"],
+    properties: {
+      id: { type: "integer" },
+    },
+  },
+  response: {
+    200: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+        data: {
+          type: "object",
+          properties: {
+            id: { type: "integer" },
+            name: { type: "string" },
+            items: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  id: { type: "integer" },
+                  state: { type: "string", enum: ["DONE"] },
+                  description: { type: "string" },
+                },
+              },
+            },
+          },
+        },
       },
     },
   },

@@ -40,12 +40,16 @@ export async function addItemToList(
   reply: FastifyReply
 ) {
   const { id: listId } = request.params as { id: string };
-  const { id, state, description, assignedTo } = request.body as {
+  let { id, state, description, assignedTo } = request.body as {
     id: number;
-    state: ItemState;
+    state?: ItemState;
     description: string;
     assignedTo?: string;
   };
+
+  if(!state){
+    state = ItemState.PENDING;
+  }
 
   const listRaw = await this.level.listsdb.get(listId);
   if (!listRaw) {
@@ -148,4 +152,34 @@ export async function deleteItemFromList(
   await this.level.listsdb.put(listId, JSON.stringify(list));
 
   reply.send({ message: "Item deleted successfully" });
+}
+
+export async function markListAsDone(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const { id: listId } = request.params as { id: string };
+
+  const listRaw = await this.level.listsdb.get(listId);
+  if (!listRaw) {
+    return reply.code(404).send({ message: "List not found" });
+  }
+
+  const list = JSON.parse(listRaw) as ITodoList;
+
+  if (!list.items || list.items.length === 0) {
+    return reply.code(400).send({ message: "List has no items to mark as done" });
+  }
+
+  list.items = list.items.map((item) => ({
+    ...item,
+    state: ItemState.DONE,
+  }));
+
+  await this.level.listsdb.put(listId, JSON.stringify(list));
+
+  reply.send({
+    message: "All items in the list marked as DONE",
+    data: list,
+  });
 }

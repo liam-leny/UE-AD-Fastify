@@ -51,6 +51,11 @@ async function lists(fastify: FastifyInstance) {
     listsController.deleteItemFromList
   );
 
+  fastify.put(
+    "/:id/done",
+    { schema: schema.markListAsDoneSchema },
+    listsController.markListAsDone
+  );
 }
 
 export default lists;
