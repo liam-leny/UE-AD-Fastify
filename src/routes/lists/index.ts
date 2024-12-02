@@ -4,6 +4,7 @@ import {
   addListSchema,
   listResponseSchema,
   updateListSchema,
+  addItemSchema,
 } from "../../schemas/lists.schema";
 
 async function lists(fastify: FastifyInstance) {
@@ -33,6 +34,14 @@ async function lists(fastify: FastifyInstance) {
       schema: updateListSchema,
     },
     listsController.putList
+  );
+
+  fastify.post(
+    "/:id/items",
+    {
+      schema: addItemSchema,
+    },
+    listsController.addItemToList
   );
 }
 

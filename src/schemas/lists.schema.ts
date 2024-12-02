@@ -5,6 +5,17 @@ export const listResponseSchema = {
     properties: {
       id: { type: "integer" },
       name: { type: "string" },
+      items: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            state: { type: "string", enum: ["PENDING", "IN-PROGRESS", "DONE"] },
+            description: { type: "string" },
+          },
+        },
+      },
     },
   },
 };
@@ -60,6 +71,40 @@ export const updateListSchema = {
           properties: {
             id: { type: "integer" },
             name: { type: "string" },
+          },
+        },
+      },
+    },
+  },
+};
+
+export const addItemSchema = {
+  body: {
+    type: "object",
+    required: ["id", "state", "description"],
+    properties: {
+      id: { type: "number" },
+      state: {
+        type: "string",
+        enum: ["PENDING", "IN-PROGRESS", "DONE"],
+      },
+      description: { type: "string" },
+    },
+  },
+  response: {
+    201: {
+      type: "object",
+      properties: {
+        message: { type: "string" },
+        data: {
+          type: "object",
+          properties: {
+            id: { type: "number" },
+            state: {
+              type: "string",
+              enum: ["PENDING", "IN-PROGRESS", "DONE"],
+            },
+            description: { type: "string" },
           },
         },
       },

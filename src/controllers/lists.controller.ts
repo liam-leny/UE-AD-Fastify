@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { ITodoList } from "../interfaces";
+import { ItemState, ITodoList } from "../interfaces";
 
 export async function listLists(request: FastifyRequest, reply: FastifyReply) {
   console.log("DB status", this.level.listsdb.status);
@@ -9,6 +9,7 @@ export async function listLists(request: FastifyRequest, reply: FastifyReply) {
   for await (const [key, value] of listsIter) {
     result.push(JSON.parse(value));
   }
+
   reply.send(result);
 }
 
@@ -32,4 +33,39 @@ export async function putList(request: FastifyRequest, reply: FastifyReply) {
   reply
     .code(200)
     .send({ message: "List updated successfully", data: updatedList });
+}
+
+export async function addItemToList(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const { id: listId } = request.params as { id: string };
+  const { id, state, description } = request.body as {
+    id: string;
+    state: ItemState;
+    description: string;
+  };
+
+  const listRaw = await this.level.listsdb.get(listId);
+  if (!listRaw) {
+    return reply.code(404).send({ message: "List not found" });
+  }
+
+  const list = JSON.parse(listRaw) as ITodoList;
+
+  if (!list.items) {
+    list.items = [];
+  }
+
+  const itemExists = list.items.some((item) => item.id === id);
+  if (itemExists) {
+    return reply.code(400).send({ message: "Item already exists" });
+  }
+
+  const newItem = { id, state, description };
+  list.items.push(newItem);
+
+  await this.level.listsdb.put(listId, JSON.stringify(list));
+
+  reply.code(201).send({ message: "Item added successfully", data: newItem });
 }
