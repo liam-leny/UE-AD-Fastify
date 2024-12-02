@@ -6,9 +6,7 @@ export interface AppOptions
   extends FastifyServerOptions,
     Partial<AutoloadPluginOptions> {}
 // Pass --options via CLI arguments in command to enable these options.
-const options: AppOptions = {
-  logger: true,
-};
+const options: AppOptions = {};
 
 const app: FastifyPluginAsync<AppOptions> = async (
   fastify,

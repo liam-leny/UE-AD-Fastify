@@ -13,6 +13,7 @@ export const listResponseSchema = {
             id: { type: "integer" },
             state: { type: "string", enum: ["PENDING", "IN-PROGRESS", "DONE"] },
             description: { type: "string" },
+            assignedTo: { type: "string" },
           },
         },
       },
@@ -89,6 +90,7 @@ export const addItemSchema = {
         enum: ["PENDING", "IN-PROGRESS", "DONE"],
       },
       description: { type: "string" },
+      assignedTo: { type: "string" },
     },
   },
   response: {
@@ -105,13 +107,13 @@ export const addItemSchema = {
               enum: ["PENDING", "IN-PROGRESS", "DONE"],
             },
             description: { type: "string" },
+            assignedTo: { type: "string" },
           },
         },
       },
     },
   },
 };
-
 
 export const updateItemSchema = {
   body: {
@@ -123,6 +125,7 @@ export const updateItemSchema = {
         enum: ["PENDING", "IN-PROGRESS", "DONE"],
       },
       description: { type: "string" },
+      assignedTo: { type: "string" },
     },
   },
   params: {
@@ -147,13 +150,13 @@ export const updateItemSchema = {
               enum: ["PENDING", "IN-PROGRESS", "DONE"],
             },
             description: { type: "string" },
+            assignedTo: { type: "string" },
           },
         },
       },
     },
   },
 };
-
 
 export const deleteItemSchema = {
   params: {

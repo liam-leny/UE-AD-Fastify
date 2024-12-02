@@ -1,7 +1,14 @@
 export interface ITodoList {
   id: number;
   name: string;
-  items?: { id: number; state: ItemState; description: string }[];
+  items?: ITodoItem[];
+}
+
+export interface ITodoItem {
+  id: number;
+  state: ItemState;
+  description: string;
+  assignedTo?: string;
 }
 
 export enum ItemState {

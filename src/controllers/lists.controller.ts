@@ -40,10 +40,11 @@ export async function addItemToList(
   reply: FastifyReply
 ) {
   const { id: listId } = request.params as { id: string };
-  const { id, state, description } = request.body as {
+  const { id, state, description, assignedTo } = request.body as {
     id: number;
     state: ItemState;
     description: string;
+    assignedTo?: string;
   };
 
   const listRaw = await this.level.listsdb.get(listId);
@@ -62,7 +63,7 @@ export async function addItemToList(
     return reply.code(400).send({ message: "Item already exists" });
   }
 
-  const newItem = { id, state, description };
+  const newItem = { id, state, description, assignedTo };
   list.items.push(newItem);
 
   await this.level.listsdb.put(listId, JSON.stringify(list));
@@ -74,10 +75,14 @@ export async function updateItemInList(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const { id: listId, itemId } = request.params as { id: string; itemId: string };
-  const { state, description } = request.body as {
+  const { id: listId, itemId } = request.params as {
+    id: string;
+    itemId: string;
+  };
+  const { state, description, assignedTo } = request.body as {
     state: ItemState;
     description: string;
+    assignedTo: string;
   };
 
   const listRaw = await this.level.listsdb.get(listId);
@@ -91,7 +96,9 @@ export async function updateItemInList(
     return reply.code(404).send({ message: "No items found in the list" });
   }
 
-  const itemIndex = list.items.findIndex((item) => item.id.toString() === itemId);
+  const itemIndex = list.items.findIndex(
+    (item) => item.id.toString() === itemId
+  );
   if (itemIndex === -1) {
     return reply.code(404).send({ message: "Item not found" });
   }
@@ -100,6 +107,7 @@ export async function updateItemInList(
     ...list.items[itemIndex],
     state: state || list.items[itemIndex].state,
     description: description || list.items[itemIndex].description,
+    assignedTo: assignedTo || list.items[itemIndex].assignedTo,
   };
   list.items[itemIndex] = updatedItem;
 
@@ -108,10 +116,14 @@ export async function updateItemInList(
   reply.send({ message: "Item updated successfully", data: updatedItem });
 }
 
-
-export async function deleteItemFromList(  request: FastifyRequest, reply: FastifyReply){
-
-  const { id: listId, itemId } = request.params as { id: string; itemId: string };
+export async function deleteItemFromList(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const { id: listId, itemId } = request.params as {
+    id: string;
+    itemId: string;
+  };
 
   const listRaw = await this.level.listsdb.get(listId);
   if (!listRaw) {
@@ -124,7 +136,9 @@ export async function deleteItemFromList(  request: FastifyRequest, reply: Fasti
     return reply.code(404).send({ message: "No items found in the list" });
   }
 
-  const itemIndex = list.items.findIndex((item) => item.id.toString() === itemId);
+  const itemIndex = list.items.findIndex(
+    (item) => item.id.toString() === itemId
+  );
   if (itemIndex === -1) {
     return reply.code(404).send({ message: "Item not found" });
   }
@@ -134,5 +148,4 @@ export async function deleteItemFromList(  request: FastifyRequest, reply: Fasti
   await this.level.listsdb.put(listId, JSON.stringify(list));
 
   reply.send({ message: "Item deleted successfully" });
-
 }
