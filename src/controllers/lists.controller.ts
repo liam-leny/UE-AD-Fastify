@@ -41,7 +41,7 @@ export async function addItemToList(
 ) {
   const { id: listId } = request.params as { id: string };
   const { id, state, description } = request.body as {
-    id: string;
+    id: number;
     state: ItemState;
     description: string;
   };
@@ -68,4 +68,71 @@ export async function addItemToList(
   await this.level.listsdb.put(listId, JSON.stringify(list));
 
   reply.code(201).send({ message: "Item added successfully", data: newItem });
+}
+
+export async function updateItemInList(
+  request: FastifyRequest,
+  reply: FastifyReply
+) {
+  const { id: listId, itemId } = request.params as { id: string; itemId: string };
+  const { state, description } = request.body as {
+    state: ItemState;
+    description: string;
+  };
+
+  const listRaw = await this.level.listsdb.get(listId);
+  if (!listRaw) {
+    return reply.code(404).send({ message: "List not found" });
+  }
+
+  const list = JSON.parse(listRaw) as ITodoList;
+
+  if (!list.items) {
+    return reply.code(404).send({ message: "No items found in the list" });
+  }
+
+  const itemIndex = list.items.findIndex((item) => item.id.toString() === itemId);
+  if (itemIndex === -1) {
+    return reply.code(404).send({ message: "Item not found" });
+  }
+
+  const updatedItem = {
+    ...list.items[itemIndex],
+    state: state || list.items[itemIndex].state,
+    description: description || list.items[itemIndex].description,
+  };
+  list.items[itemIndex] = updatedItem;
+
+  await this.level.listsdb.put(listId, JSON.stringify(list));
+
+  reply.send({ message: "Item updated successfully", data: updatedItem });
+}
+
+
+export async function deleteItemFromList(  request: FastifyRequest, reply: FastifyReply){
+
+  const { id: listId, itemId } = request.params as { id: string; itemId: string };
+
+  const listRaw = await this.level.listsdb.get(listId);
+  if (!listRaw) {
+    return reply.code(404).send({ message: "List not found" });
+  }
+
+  const list = JSON.parse(listRaw) as ITodoList;
+
+  if (!list.items) {
+    return reply.code(404).send({ message: "No items found in the list" });
+  }
+
+  const itemIndex = list.items.findIndex((item) => item.id.toString() === itemId);
+  if (itemIndex === -1) {
+    return reply.code(404).send({ message: "Item not found" });
+  }
+
+  list.items.splice(itemIndex, 1);
+
+  await this.level.listsdb.put(listId, JSON.stringify(list));
+
+  reply.send({ message: "Item deleted successfully" });
+
 }

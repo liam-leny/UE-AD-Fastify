@@ -1,7 +1,7 @@
 export interface ITodoList {
   id: number;
   name: string;
-  items?: { id: string; state: ItemState; description: string }[];
+  items?: { id: number; state: ItemState; description: string }[];
 }
 
 export enum ItemState {

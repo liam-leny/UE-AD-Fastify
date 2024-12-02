@@ -1,11 +1,6 @@
 import { FastifyInstance } from "fastify";
 import * as listsController from "../../controllers/lists.controller";
-import {
-  addListSchema,
-  listResponseSchema,
-  updateListSchema,
-  addItemSchema,
-} from "../../schemas/lists.schema";
+import * as schema from "../../schemas/lists.schema";
 
 async function lists(fastify: FastifyInstance) {
   fastify.get(
@@ -13,7 +8,7 @@ async function lists(fastify: FastifyInstance) {
     {
       schema: {
         response: {
-          200: listResponseSchema,
+          200: schema.listResponseSchema,
         },
       },
     },
@@ -23,7 +18,7 @@ async function lists(fastify: FastifyInstance) {
   fastify.post(
     "/",
     {
-      schema: addListSchema,
+      schema: schema.addListSchema,
     },
     listsController.addList
   );
@@ -31,7 +26,7 @@ async function lists(fastify: FastifyInstance) {
   fastify.put(
     "/:id",
     {
-      schema: updateListSchema,
+      schema: schema.updateListSchema,
     },
     listsController.putList
   );
@@ -39,10 +34,23 @@ async function lists(fastify: FastifyInstance) {
   fastify.post(
     "/:id/items",
     {
-      schema: addItemSchema,
+      schema: schema.addItemSchema,
     },
     listsController.addItemToList
   );
+
+  fastify.put(
+    "/:id/items/:itemId",
+    { schema: schema.updateItemSchema },
+    listsController.updateItemInList
+  );
+  
+  fastify.delete(
+    "/:id/items/:itemId",
+    { schema: schema.deleteItemSchema },
+    listsController.deleteItemFromList
+  );
+
 }
 
 export default lists;
