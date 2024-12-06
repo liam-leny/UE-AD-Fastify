@@ -34,7 +34,7 @@ const app: FastifyPluginAsync<AppOptions> = async (
 
   void fastify.register(SwaggerUI, {
     routePrefix: "/api-docs",
-  });  
+  });
 };
 
 export default app;
