@@ -4,12 +4,14 @@ export const listResponseSchema = {
   description: "Fetch all available lists with their respective items.",
   type: "array",
   items: {
+    $ref: "ITodoList#",
     type: "object",
     properties: {
       id: { type: "integer" },
       name: { type: "string" },
       items: {
         type: "array",
+        $ref: "ITodoItem#",
         items: {
           type: "object",
           properties: {
@@ -22,13 +24,24 @@ export const listResponseSchema = {
       },
     },
   },
+  response: {
+    200: {
+      description: "Successfully fetched all lists.",
+      type: "array",
+      items: {
+        $ref: "ITodoList#",
+      },
+    },
+  },
 };
+
 
 export const addListSchema = {
   tags: ["Lists"],
   summary: "Add a new list",
   description: "Create a new list with a unique ID and name.",
   body: {
+    $ref: "ITodoList#",
     type: "object",
     required: ["id", "name"],
     properties: {
@@ -39,6 +52,7 @@ export const addListSchema = {
   response: {
     201: {
       description: "The newly created list.",
+      $ref: "ITodoList#",
       type: "object",
       properties: {
         message: { type: "string" },
@@ -75,6 +89,7 @@ export const updateListSchema = {
   response: {
     200: {
       description: "The updated list details.",
+      $ref: "ITodoList#",
       type: "object",
       properties: {
         message: { type: "string" },
@@ -95,6 +110,7 @@ export const addItemSchema = {
   summary: "Add a new item",
   description: "Add a new item to a specific list.",
   body: {
+    $ref: "ITodoItem#",
     type: "object",
     required: ["id", "description"],
     properties: {
@@ -110,6 +126,7 @@ export const addItemSchema = {
   response: {
     201: {
       description: "The newly created item.",
+      $ref: "ITodoItem#", 
       type: "object",
       properties: {
         message: { type: "string" },
@@ -135,6 +152,7 @@ export const updateItemSchema = {
   summary: "Update an item",
   description: "Update the details of an item within a list.",
   body: {
+    $ref: "ITodoItem#",
     type: "object",
     required: ["state", "description"],
     properties: {
@@ -157,6 +175,7 @@ export const updateItemSchema = {
   response: {
     200: {
       description: "The updated item details.",
+      $ref: "ITodoItem#",
       type: "object",
       properties: {
         message: { type: "string" },
@@ -218,6 +237,7 @@ export const markListAsDoneSchema = {
       properties: {
         message: { type: "string" },
         data: {
+          $ref: "ITodoList#",
           type: "object",
           properties: {
             id: { type: "integer" },

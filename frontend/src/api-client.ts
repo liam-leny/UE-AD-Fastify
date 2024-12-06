@@ -37,17 +37,17 @@ const listItems: Record<string, string[]> = {
   ],
 };
 
-// const api = new ListsApi(
-//     {
-//         isJsonMime: (mime: string) => mime.startsWith('application/json')
-//     },
-//     'http://localhost:3000',
-//     axios,
-// )
+const api = new ListsApi(
+    {
+        isJsonMime: (mime: string) => mime.startsWith('application/json')
+    },
+    'http://localhost:3000',
+    axios,
+)
 
 export const apiClient = {
   getLists: async () => {
-    return Promise.resolve(lists);
+    return api.listsGet().then(r => r.data)
     // const response = await api.listsGet()
     // return response.data
   },

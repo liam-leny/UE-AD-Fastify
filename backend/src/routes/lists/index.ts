@@ -1,8 +1,12 @@
 import { FastifyInstance } from "fastify";
+import cors from '@fastify/cors'
 import * as listsController from "../../controllers/lists.controller";
 import * as schema from "../../schemas/index";
-
 async function lists(fastify: FastifyInstance) {
+  fastify.register(cors, {
+    origin: '*', 
+  });
+
   fastify.get(
     "/",
     {
@@ -54,4 +58,7 @@ async function lists(fastify: FastifyInstance) {
   );
 }
 
-export default lists;
+export default lists
+
+
+

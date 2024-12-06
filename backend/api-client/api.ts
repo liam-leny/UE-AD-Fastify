@@ -110,68 +110,11 @@ export interface ListsIdDonePut200Response {
     'message'?: string;
     /**
      * 
-     * @type {ListsIdDonePut200ResponseData}
+     * @type {Def0}
      * @memberof ListsIdDonePut200Response
      */
-    'data'?: ListsIdDonePut200ResponseData;
+    'data'?: Def0;
 }
-/**
- * 
- * @export
- * @interface ListsIdDonePut200ResponseData
- */
-export interface ListsIdDonePut200ResponseData {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsIdDonePut200ResponseData
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdDonePut200ResponseData
-     */
-    'name'?: string;
-    /**
-     * 
-     * @type {Array<ListsIdDonePut200ResponseDataItemsInner>}
-     * @memberof ListsIdDonePut200ResponseData
-     */
-    'items'?: Array<ListsIdDonePut200ResponseDataItemsInner>;
-}
-/**
- * 
- * @export
- * @interface ListsIdDonePut200ResponseDataItemsInner
- */
-export interface ListsIdDonePut200ResponseDataItemsInner {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsIdDonePut200ResponseDataItemsInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdDonePut200ResponseDataItemsInner
-     */
-    'state'?: ListsIdDonePut200ResponseDataItemsInnerStateEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdDonePut200ResponseDataItemsInner
-     */
-    'description'?: string;
-}
-
-export const ListsIdDonePut200ResponseDataItemsInnerStateEnum = {
-    Done: 'DONE'
-} as const;
-
-export type ListsIdDonePut200ResponseDataItemsInnerStateEnum = typeof ListsIdDonePut200ResponseDataItemsInnerStateEnum[keyof typeof ListsIdDonePut200ResponseDataItemsInnerStateEnum];
-
 /**
  * Confirmation of the deleted item.
  * @export
@@ -186,177 +129,6 @@ export interface ListsIdItemsItemIdDelete200Response {
     'message'?: string;
 }
 /**
- * The updated item details.
- * @export
- * @interface ListsIdItemsItemIdPut200Response
- */
-export interface ListsIdItemsItemIdPut200Response {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsItemIdPut200Response
-     */
-    'message'?: string;
-    /**
-     * 
-     * @type {ListsIdItemsPost201ResponseData}
-     * @memberof ListsIdItemsItemIdPut200Response
-     */
-    'data'?: ListsIdItemsPost201ResponseData;
-}
-/**
- * 
- * @export
- * @interface ListsIdItemsItemIdPutRequest
- */
-export interface ListsIdItemsItemIdPutRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsItemIdPutRequest
-     */
-    'state': ListsIdItemsItemIdPutRequestStateEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsItemIdPutRequest
-     */
-    'description': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsItemIdPutRequest
-     */
-    'assignedTo'?: string;
-}
-
-export const ListsIdItemsItemIdPutRequestStateEnum = {
-    Pending: 'PENDING',
-    InProgress: 'IN-PROGRESS',
-    Done: 'DONE'
-} as const;
-
-export type ListsIdItemsItemIdPutRequestStateEnum = typeof ListsIdItemsItemIdPutRequestStateEnum[keyof typeof ListsIdItemsItemIdPutRequestStateEnum];
-
-/**
- * The newly created item.
- * @export
- * @interface ListsIdItemsPost201Response
- */
-export interface ListsIdItemsPost201Response {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPost201Response
-     */
-    'message'?: string;
-    /**
-     * 
-     * @type {ListsIdItemsPost201ResponseData}
-     * @memberof ListsIdItemsPost201Response
-     */
-    'data'?: ListsIdItemsPost201ResponseData;
-}
-/**
- * 
- * @export
- * @interface ListsIdItemsPost201ResponseData
- */
-export interface ListsIdItemsPost201ResponseData {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsIdItemsPost201ResponseData
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPost201ResponseData
-     */
-    'state'?: ListsIdItemsPost201ResponseDataStateEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPost201ResponseData
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPost201ResponseData
-     */
-    'assignedTo'?: string;
-}
-
-export const ListsIdItemsPost201ResponseDataStateEnum = {
-    Pending: 'PENDING',
-    InProgress: 'IN-PROGRESS',
-    Done: 'DONE'
-} as const;
-
-export type ListsIdItemsPost201ResponseDataStateEnum = typeof ListsIdItemsPost201ResponseDataStateEnum[keyof typeof ListsIdItemsPost201ResponseDataStateEnum];
-
-/**
- * 
- * @export
- * @interface ListsIdItemsPostRequest
- */
-export interface ListsIdItemsPostRequest {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsIdItemsPostRequest
-     */
-    'id': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPostRequest
-     */
-    'state'?: ListsIdItemsPostRequestStateEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPostRequest
-     */
-    'description': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdItemsPostRequest
-     */
-    'assignedTo'?: string;
-}
-
-export const ListsIdItemsPostRequestStateEnum = {
-    Pending: 'PENDING',
-    InProgress: 'IN-PROGRESS',
-    Done: 'DONE'
-} as const;
-
-export type ListsIdItemsPostRequestStateEnum = typeof ListsIdItemsPostRequestStateEnum[keyof typeof ListsIdItemsPostRequestStateEnum];
-
-/**
- * The updated list details.
- * @export
- * @interface ListsIdPut200Response
- */
-export interface ListsIdPut200Response {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsIdPut200Response
-     */
-    'message'?: string;
-    /**
-     * 
-     * @type {ListsPost201ResponseData}
-     * @memberof ListsIdPut200Response
-     */
-    'data'?: ListsPost201ResponseData;
-}
-/**
  * 
  * @export
  * @interface ListsIdPutRequest
@@ -366,63 +138,6 @@ export interface ListsIdPutRequest {
      * 
      * @type {string}
      * @memberof ListsIdPutRequest
-     */
-    'name': string;
-}
-/**
- * The newly created list.
- * @export
- * @interface ListsPost201Response
- */
-export interface ListsPost201Response {
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsPost201Response
-     */
-    'message'?: string;
-    /**
-     * 
-     * @type {ListsPost201ResponseData}
-     * @memberof ListsPost201Response
-     */
-    'data'?: ListsPost201ResponseData;
-}
-/**
- * 
- * @export
- * @interface ListsPost201ResponseData
- */
-export interface ListsPost201ResponseData {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsPost201ResponseData
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsPost201ResponseData
-     */
-    'name'?: string;
-}
-/**
- * 
- * @export
- * @interface ListsPostRequest
- */
-export interface ListsPostRequest {
-    /**
-     * 
-     * @type {number}
-     * @memberof ListsPostRequest
-     */
-    'id': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ListsPostRequest
      */
     'name': string;
 }
@@ -631,17 +346,17 @@ export const ItemsApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Update an item
          * @param {number} id 
          * @param {string} itemId 
-         * @param {ListsIdItemsItemIdPutRequest} listsIdItemsItemIdPutRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsIdItemsItemIdPut: async (id: number, itemId: string, listsIdItemsItemIdPutRequest: ListsIdItemsItemIdPutRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listsIdItemsItemIdPut: async (id: number, itemId: string, def1: Def1, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('listsIdItemsItemIdPut', 'id', id)
             // verify required parameter 'itemId' is not null or undefined
             assertParamExists('listsIdItemsItemIdPut', 'itemId', itemId)
-            // verify required parameter 'listsIdItemsItemIdPutRequest' is not null or undefined
-            assertParamExists('listsIdItemsItemIdPut', 'listsIdItemsItemIdPutRequest', listsIdItemsItemIdPutRequest)
+            // verify required parameter 'def1' is not null or undefined
+            assertParamExists('listsIdItemsItemIdPut', 'def1', def1)
             const localVarPath = `/lists/{id}/items/{itemId}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)))
                 .replace(`{${"itemId"}}`, encodeURIComponent(String(itemId)));
@@ -663,7 +378,7 @@ export const ItemsApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(listsIdItemsItemIdPutRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(def1, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -674,15 +389,15 @@ export const ItemsApiAxiosParamCreator = function (configuration?: Configuration
          * Add a new item to a specific list.
          * @summary Add a new item
          * @param {string} id 
-         * @param {ListsIdItemsPostRequest} listsIdItemsPostRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsIdItemsPost: async (id: string, listsIdItemsPostRequest: ListsIdItemsPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        listsIdItemsPost: async (id: string, def1: Def1, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('listsIdItemsPost', 'id', id)
-            // verify required parameter 'listsIdItemsPostRequest' is not null or undefined
-            assertParamExists('listsIdItemsPost', 'listsIdItemsPostRequest', listsIdItemsPostRequest)
+            // verify required parameter 'def1' is not null or undefined
+            assertParamExists('listsIdItemsPost', 'def1', def1)
             const localVarPath = `/lists/{id}/items`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -703,7 +418,7 @@ export const ItemsApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(listsIdItemsPostRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(def1, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -739,12 +454,12 @@ export const ItemsApiFp = function(configuration?: Configuration) {
          * @summary Update an item
          * @param {number} id 
          * @param {string} itemId 
-         * @param {ListsIdItemsItemIdPutRequest} listsIdItemsItemIdPutRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listsIdItemsItemIdPut(id: number, itemId: string, listsIdItemsItemIdPutRequest: ListsIdItemsItemIdPutRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListsIdItemsItemIdPut200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listsIdItemsItemIdPut(id, itemId, listsIdItemsItemIdPutRequest, options);
+        async listsIdItemsItemIdPut(id: number, itemId: string, def1: Def1, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Def1>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listsIdItemsItemIdPut(id, itemId, def1, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ItemsApi.listsIdItemsItemIdPut']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -753,12 +468,12 @@ export const ItemsApiFp = function(configuration?: Configuration) {
          * Add a new item to a specific list.
          * @summary Add a new item
          * @param {string} id 
-         * @param {ListsIdItemsPostRequest} listsIdItemsPostRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listsIdItemsPost(id: string, listsIdItemsPostRequest: ListsIdItemsPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListsIdItemsPost201Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listsIdItemsPost(id, listsIdItemsPostRequest, options);
+        async listsIdItemsPost(id: string, def1: Def1, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Def1>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listsIdItemsPost(id, def1, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ItemsApi.listsIdItemsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -789,23 +504,23 @@ export const ItemsApiFactory = function (configuration?: Configuration, basePath
          * @summary Update an item
          * @param {number} id 
          * @param {string} itemId 
-         * @param {ListsIdItemsItemIdPutRequest} listsIdItemsItemIdPutRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsIdItemsItemIdPut(id: number, itemId: string, listsIdItemsItemIdPutRequest: ListsIdItemsItemIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListsIdItemsItemIdPut200Response> {
-            return localVarFp.listsIdItemsItemIdPut(id, itemId, listsIdItemsItemIdPutRequest, options).then((request) => request(axios, basePath));
+        listsIdItemsItemIdPut(id: number, itemId: string, def1: Def1, options?: RawAxiosRequestConfig): AxiosPromise<Def1> {
+            return localVarFp.listsIdItemsItemIdPut(id, itemId, def1, options).then((request) => request(axios, basePath));
         },
         /**
          * Add a new item to a specific list.
          * @summary Add a new item
          * @param {string} id 
-         * @param {ListsIdItemsPostRequest} listsIdItemsPostRequest 
+         * @param {Def1} def1 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsIdItemsPost(id: string, listsIdItemsPostRequest: ListsIdItemsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListsIdItemsPost201Response> {
-            return localVarFp.listsIdItemsPost(id, listsIdItemsPostRequest, options).then((request) => request(axios, basePath));
+        listsIdItemsPost(id: string, def1: Def1, options?: RawAxiosRequestConfig): AxiosPromise<Def1> {
+            return localVarFp.listsIdItemsPost(id, def1, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -835,26 +550,26 @@ export class ItemsApi extends BaseAPI {
      * @summary Update an item
      * @param {number} id 
      * @param {string} itemId 
-     * @param {ListsIdItemsItemIdPutRequest} listsIdItemsItemIdPutRequest 
+     * @param {Def1} def1 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ItemsApi
      */
-    public listsIdItemsItemIdPut(id: number, itemId: string, listsIdItemsItemIdPutRequest: ListsIdItemsItemIdPutRequest, options?: RawAxiosRequestConfig) {
-        return ItemsApiFp(this.configuration).listsIdItemsItemIdPut(id, itemId, listsIdItemsItemIdPutRequest, options).then((request) => request(this.axios, this.basePath));
+    public listsIdItemsItemIdPut(id: number, itemId: string, def1: Def1, options?: RawAxiosRequestConfig) {
+        return ItemsApiFp(this.configuration).listsIdItemsItemIdPut(id, itemId, def1, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Add a new item to a specific list.
      * @summary Add a new item
      * @param {string} id 
-     * @param {ListsIdItemsPostRequest} listsIdItemsPostRequest 
+     * @param {Def1} def1 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ItemsApi
      */
-    public listsIdItemsPost(id: string, listsIdItemsPostRequest: ListsIdItemsPostRequest, options?: RawAxiosRequestConfig) {
-        return ItemsApiFp(this.configuration).listsIdItemsPost(id, listsIdItemsPostRequest, options).then((request) => request(this.axios, this.basePath));
+    public listsIdItemsPost(id: string, def1: Def1, options?: RawAxiosRequestConfig) {
+        return ItemsApiFp(this.configuration).listsIdItemsPost(id, def1, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -973,13 +688,13 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Create a new list with a unique ID and name.
          * @summary Add a new list
-         * @param {ListsPostRequest} listsPostRequest 
+         * @param {Def0} def0 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsPost: async (listsPostRequest: ListsPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'listsPostRequest' is not null or undefined
-            assertParamExists('listsPost', 'listsPostRequest', listsPostRequest)
+        listsPost: async (def0: Def0, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'def0' is not null or undefined
+            assertParamExists('listsPost', 'def0', def0)
             const localVarPath = `/lists/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -999,7 +714,7 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(listsPostRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(def0, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1022,7 +737,7 @@ export const ListsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async listsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Def0>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ListsApi.listsGet']?.[localVarOperationServerIndex]?.url;
@@ -1049,7 +764,7 @@ export const ListsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listsIdPut(id: number, listsIdPutRequest: ListsIdPutRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListsIdPut200Response>> {
+        async listsIdPut(id: number, listsIdPutRequest: ListsIdPutRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Def0>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listsIdPut(id, listsIdPutRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ListsApi.listsIdPut']?.[localVarOperationServerIndex]?.url;
@@ -1058,12 +773,12 @@ export const ListsApiFp = function(configuration?: Configuration) {
         /**
          * Create a new list with a unique ID and name.
          * @summary Add a new list
-         * @param {ListsPostRequest} listsPostRequest 
+         * @param {Def0} def0 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listsPost(listsPostRequest: ListsPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListsPost201Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listsPost(listsPostRequest, options);
+        async listsPost(def0: Def0, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Def0>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listsPost(def0, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ListsApi.listsPost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1084,7 +799,7 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsGet(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        listsGet(options?: RawAxiosRequestConfig): AxiosPromise<Array<Def0>> {
             return localVarFp.listsGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1105,18 +820,18 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsIdPut(id: number, listsIdPutRequest: ListsIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListsIdPut200Response> {
+        listsIdPut(id: number, listsIdPutRequest: ListsIdPutRequest, options?: RawAxiosRequestConfig): AxiosPromise<Def0> {
             return localVarFp.listsIdPut(id, listsIdPutRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Create a new list with a unique ID and name.
          * @summary Add a new list
-         * @param {ListsPostRequest} listsPostRequest 
+         * @param {Def0} def0 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listsPost(listsPostRequest: ListsPostRequest, options?: RawAxiosRequestConfig): AxiosPromise<ListsPost201Response> {
-            return localVarFp.listsPost(listsPostRequest, options).then((request) => request(axios, basePath));
+        listsPost(def0: Def0, options?: RawAxiosRequestConfig): AxiosPromise<Def0> {
+            return localVarFp.listsPost(def0, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1167,13 +882,13 @@ export class ListsApi extends BaseAPI {
     /**
      * Create a new list with a unique ID and name.
      * @summary Add a new list
-     * @param {ListsPostRequest} listsPostRequest 
+     * @param {Def0} def0 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ListsApi
      */
-    public listsPost(listsPostRequest: ListsPostRequest, options?: RawAxiosRequestConfig) {
-        return ListsApiFp(this.configuration).listsPost(listsPostRequest, options).then((request) => request(this.axios, this.basePath));
+    public listsPost(def0: Def0, options?: RawAxiosRequestConfig) {
+        return ListsApiFp(this.configuration).listsPost(def0, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
