@@ -16,12 +16,7 @@
             "$ref": "ITodoItem#"
           }
         }
-      },
-      "required": [
-        "id",
-        "name"
-      ],
-      "additionalProperties": false
+      }
     },
     "ITodoItem": {
       "type": "object",
@@ -38,21 +33,11 @@
         "assignedTo": {
           "type": "string"
         }
-      },
-      "required": [
-        "id",
-        "state",
-        "description"
-      ],
-      "additionalProperties": false
+      }
     },
     "ItemState": {
       "type": "string",
-      "enum": [
-        "PENDING",
-        "IN-PROGRESS",
-        "DONE"
-      ]
+      "enum": ["PENDING", "IN-PROGRESS", "DONE"]
     }
   }
 }

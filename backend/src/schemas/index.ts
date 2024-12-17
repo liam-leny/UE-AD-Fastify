@@ -43,7 +43,7 @@ export const addListSchema = {
   body: {
     $ref: "ITodoList#",
     type: "object",
-    required: ["id", "name"],
+    required: ["name"], 
     properties: {
       id: { type: "integer" },
       name: { type: "string" },
@@ -59,13 +59,13 @@ export const addListSchema = {
         data: {
           type: "object",
           properties: {
-            id: { type: "integer" },
-            name: { type: "string" },
-          },
-        },
-      },
-    },
-  },
+            id: { type: "integer" }, 
+            name: { type: "string" }
+          }
+        }
+      }
+    }
+  }
 };
 
 export const updateListSchema = {
@@ -112,7 +112,7 @@ export const addItemSchema = {
   body: {
     $ref: "ITodoItem#",
     type: "object",
-    required: ["id", "description"],
+    required: ["description"], 
     properties: {
       id: { type: "integer" },
       state: {

@@ -2,7 +2,6 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { ItemState, ITodoList } from "../interfaces";
 
 export async function listLists(request: FastifyRequest, reply: FastifyReply) {
-  console.log("DB status", this.level.listsdb.status);
   const listsIter = this.level.listsdb.iterator();
 
   const result: ITodoList[] = [];
@@ -16,10 +15,23 @@ export async function listLists(request: FastifyRequest, reply: FastifyReply) {
 export async function addList(request: FastifyRequest, reply: FastifyReply) {
   const list = request.body as ITodoList;
 
+  let maxId = 0;
+
+  for await (const key of this.level.listsdb.createKeyStream()) {
+    const numericKey = parseInt(key, 10);
+    if (!isNaN(numericKey)) {
+      maxId = Math.max(maxId, numericKey);
+    }
+  }
+
+  const newId = maxId + 1;
+  list.id = newId; 
+
   const result = await this.level.listsdb.put(
-    list.id.toString(),
+    newId.toString(),
     JSON.stringify(list)
   );
+
   reply.code(201).send({ message: "List added successfully", data: list });
 }
 
@@ -40,8 +52,7 @@ export async function addItemToList(
   reply: FastifyReply
 ) {
   const { id: listId } = request.params as { id: string };
-  let { id, state, description, assignedTo } = request.body as {
-    id: number;
+  let { state, description, assignedTo } = request.body as {
     state?: ItemState;
     description: string;
     assignedTo?: string;
@@ -62,10 +73,12 @@ export async function addItemToList(
     list.items = [];
   }
 
-  const itemExists = list.items.some((item) => item.id === id);
-  if (itemExists) {
-    return reply.code(400).send({ message: "Item already exists" });
+
+  let maxId = 0;
+  for (const item of list.items) {
+    maxId = Math.max(maxId, item.id);
   }
+  const id = maxId + 1;
 
   const newItem = { id, state, description, assignedTo };
   list.items.push(newItem);

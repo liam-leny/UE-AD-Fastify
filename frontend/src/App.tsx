@@ -4,17 +4,18 @@ import { apiClient } from "./api-client";
 import { useEffect, useState } from "react";
 import { ListForm } from "./ListForm";
 import { TodoForm } from "./TodoForm";
+import { Def0 } from "todo-list-client";
 const { Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function App() {
   // TODO use correct types instead of any
-  const [lists, setLists] = useState<any[]>([]);
+  const [lists, setLists] = useState<Def0[]>([]);
   const [selectedList, setSelectedList] = useState<any | null>(null);
   const [showListForm, setShowListForm] = useState(false);
   const [showTodoForm, setShowTodoForm] = useState(false);
-  const [selectedListItems, setSelectedListItems] = useState<string[]>([]);
+  const [selectedListItems, setSelectedListItems] = useState<any>([]);
 
   useEffect(() => {
     apiClient.getLists().then(setLists);
@@ -35,27 +36,31 @@ export default function App() {
     }
   }
 
-  // TODO: fix any, use type from API
-  const items: MenuItem[] = lists.map((list: any) => ({
-    key: list.id,
+  const items: MenuItem[] = lists.map((list: Def0) => ({
+    key : list.name,
     label: list.name
   }));
 
   function handleListAdded(listName: string): void {
-    console.debug('-- handleListAdded', listName);
-    apiClient.addList(listName).then((result) => {
-      console.debug('-- handleListAdded result', result);
-      setLists(result)
+    apiClient.addList(listName).then(() => {
+      apiClient.getLists().then((updatedLists) => {
+        setLists(updatedLists);
+        setShowListForm(false);
+      });
     });
-    setShowListForm(false);
   }
 
   function handleTodoAdded(todo: string): void {
     if (selectedList) {
-      apiClient.addTodo(selectedList, todo).then(setSelectedListItems);
+      apiClient.addTodo(selectedList, todo).then(() => {
+        apiClient.getTodos(selectedList).then((updatedItems) => {
+          setSelectedListItems(updatedItems);  
+          setShowTodoForm(false); 
+        });
+      });
     }
-    setShowTodoForm(false);
   }
+  
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -84,7 +89,7 @@ export default function App() {
               <Button onClick={() => setShowTodoForm(true)}>Add Todo</Button>
               <List
                 dataSource={selectedListItems}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
+                renderItem={(item) => <List.Item>{item as React.ReactNode}</List.Item>}
               />
             </div>
           }
