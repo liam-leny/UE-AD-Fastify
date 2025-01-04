@@ -4,7 +4,7 @@ import { apiClient } from "./api-client";
 import { useEffect, useState } from "react";
 import { ListForm } from "./ListForm";
 import { TodoForm } from "./TodoForm";
-import { Def0 } from "todo-list-client";
+import { Def0 } from "@liam8/todo-list-client";
 const { Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];

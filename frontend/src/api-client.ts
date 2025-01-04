@@ -1,5 +1,5 @@
 // import { ITodoList, TodoListStatus } from './api-types'
-import { Def0, Def1, Def2, ItemsApi, ListsApi } from "todo-list-client";
+import { Def0, Def1, Def2, ItemsApi, ListsApi } from "@liam8/todo-list-client";
 import axios from "axios";
 
 const listsApi = new ListsApi(
@@ -34,9 +34,9 @@ export const apiClient = {
     return listsApi.listsPost(newList).then(r => r.data)
   },
 
-  getTodos: async (listId: number): Promise<string[]> => {
-    const response = await listsApi.listsGet() 
-    const list = response.data.find((list: Def0) => list.id == listId); 
+  getTodos: async (listName: string): Promise<string[]> => {
+    const response = await listsApi.listsGet();
+    const list = response.data.find((list: Def0) => list.name === listName); 
     
     if (!list || !list.items) {
         return []; 
@@ -45,9 +45,9 @@ export const apiClient = {
     return list.items.map((item: Def1) => item.description); 
   },
 
-  addTodo: async (listId: number, todo: string) => {
+  addTodo: async (listName: string, todo: string) => {
     const response = await listsApi.listsGet();
-    const list = response.data.find((list: Def0) => list.id == listId);
+    const list = response.data.find((list: Def0) => list.name === listName);
     if (!list) {
       return []; 
     }
@@ -57,6 +57,6 @@ export const apiClient = {
       description: todo,
       state : Def2.Pending
     };
-    return itemsApi.listsIdItemsPost(String(listId),newItem).then(r => r.data);
+    return itemsApi.listsIdItemsPost(String(list.id),newItem).then(r => r.data);
   },
 };
