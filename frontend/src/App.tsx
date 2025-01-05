@@ -4,14 +4,14 @@ import { apiClient } from "./api-client";
 import { useEffect, useState } from "react";
 import { ListForm } from "./ListForm";
 import { TodoForm } from "./TodoForm";
-import { Def0 } from "@liam8/todo-list-client";
+import { ITodoList } from "./api-types";
 const { Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function App() {
   // TODO use correct types instead of any
-  const [lists, setLists] = useState<Def0[]>([]);
+  const [lists, setLists] = useState<ITodoList[]>([]);
   const [selectedList, setSelectedList] = useState<any | null>(null);
   const [showListForm, setShowListForm] = useState(false);
   const [showTodoForm, setShowTodoForm] = useState(false);
@@ -36,7 +36,7 @@ export default function App() {
     }
   }
 
-  const items: MenuItem[] = lists.map((list: Def0) => ({
+  const items: MenuItem[] = lists.map((list: ITodoList) => ({
     key : list.name,
     label: list.name
   }));

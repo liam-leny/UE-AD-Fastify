@@ -1,7 +1,7 @@
 export interface ITodoList {
   id: number;
   name: string;
-  items?: ITodoItem[];
+  items: ITodoItem[];
 }
 
 export interface ITodoItem {
