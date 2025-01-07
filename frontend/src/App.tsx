@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ListForm } from "./ListForm";
 import { TodoForm } from "./TodoForm";
 import { ITodoList } from "./api-types";
+import { ITodoItem } from "./api-types";
 const { Header, Content, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -15,7 +16,7 @@ export default function App() {
   const [selectedList, setSelectedList] = useState<any | null>(null);
   const [showListForm, setShowListForm] = useState(false);
   const [showTodoForm, setShowTodoForm] = useState(false);
-  const [selectedListItems, setSelectedListItems] = useState<any>([]);
+  const [selectedListItems, setSelectedListItems] = useState<ITodoItem[]>([]);
 
   useEffect(() => {
     apiClient.getLists().then(setLists);
@@ -60,9 +61,7 @@ export default function App() {
       });
     }
   }
-  
-
-  return (
+    return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ display: 'flex', alignItems: 'center', color: 'white' }}>
           TODO LISTS
@@ -89,7 +88,11 @@ export default function App() {
               <Button onClick={() => setShowTodoForm(true)}>Add Todo</Button>
               <List
                 dataSource={selectedListItems}
-                renderItem={(item) => <List.Item>{item as React.ReactNode}</List.Item>}
+                renderItem={(item) => <List.Item>      
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                  <span>{item.description}</span> 
+                  <span>{item.state}</span> 
+              </div></List.Item>}
               />
             </div>
           }

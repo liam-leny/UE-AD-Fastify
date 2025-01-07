@@ -39,7 +39,7 @@ A simple task management application consisting of a **backend API** built with 
 
 2. Access the application
 
-- Frontend : http://localhost:8080
+- Frontend : http://localhost:3006
 - Backend : http://localhost:3000
 - Redis: Will be running internally within Docker on the `redis://db:6379` (not directly accessible unless needed for debugging).
 

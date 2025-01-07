@@ -2,11 +2,13 @@ import { ItemsApi, ListsApi, Def2 as ItemState } from "@liam8/todo-list-client";
 import { ITodoList, ITodoItem } from "./api-types";
 import axios from "axios";
 
+const API_URL = "http://localhost:3000";
+
 const listsApi = new ListsApi(
     {
         isJsonMime: (mime: string) => mime.startsWith('application/json')
     },
-    'http://localhost:3000',
+    API_URL,
     axios,
 )
 
@@ -14,7 +16,7 @@ const itemsApi = new ItemsApi(
   {
       isJsonMime: (mime: string) => mime.startsWith('application/json')
   },
-  'http://localhost:3000',
+  API_URL,
   axios,
 )
 
@@ -26,7 +28,7 @@ export const apiClient = {
   
   addList: async (listName: string) => {
     const newList: ITodoList = {
-      id: 0, //Id temporaire généré aléatoirement par le backend
+      id: 0, //Id temporaire sera généré aléatoirement par le backend
       name: listName,
       items: [], 
     };
@@ -34,7 +36,7 @@ export const apiClient = {
     return listsApi.listsPost(newList).then(r => r.data)
   },
 
-  getTodos: async (listName: string): Promise<string[]> => {
+  getTodos: async (listName: string): Promise<ITodoItem[]> => {
     const response = await listsApi.listsGet();
     const list = response.data.find((list: ITodoList) => list.name === listName); 
     
@@ -42,7 +44,7 @@ export const apiClient = {
         return []; 
     }
 
-    return list.items.map((item: ITodoItem) => item.description); 
+    return list.items.map((item: ITodoItem) => item); 
   },
 
   addTodo: async (listName: string, todo: string) => {
@@ -53,10 +55,10 @@ export const apiClient = {
     }
     
     const newItem: ITodoItem = {
-      id: 0, //Id temporaire généré aléatoirement par le backend 
+      id: 0, //Id temporaire sera généré aléatoirement par le backend 
       description: todo,
       state : ItemState.Pending
     };
-    return itemsApi.listsIdItemsPost(String(list.id),newItem).then(r => r.data);
+    return itemsApi.listsIdItemsPost(String(list.id), newItem).then(r => r.data);
   },
 };

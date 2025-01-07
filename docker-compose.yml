@@ -19,7 +19,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 8080:80
+      - 3006:80
 
   db:
     image: redis:7.4.1

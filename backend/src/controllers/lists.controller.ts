@@ -108,7 +108,7 @@ export async function updateItemInList(request: FastifyRequest, reply: FastifyRe
 
   const list = {
     ...listRaw,
-    items: listRaw.items ? JSON.parse(listRaw.items) : [], // Initialiser items si nécessaire
+    items: listRaw.items ? JSON.parse(listRaw.items) : [],
   } as ITodoList;
 
   const itemIndex = list.items.findIndex((item) => item.id === parseInt(itemId, 10));
@@ -143,7 +143,7 @@ export async function deleteItemFromList(request: FastifyRequest, reply: Fastify
 
   const list = {
     ...listRaw,
-    items: listRaw.items ? JSON.parse(listRaw.items) : [], // Initialiser items si nécessaire
+    items: listRaw.items ? JSON.parse(listRaw.items) : [],
   } as ITodoList;
 
   const itemIndex = list.items.findIndex((item) => item.id === parseInt(itemId, 10));
@@ -172,7 +172,7 @@ export async function markListAsDone(request: FastifyRequest, reply: FastifyRepl
 
   const list = {
     ...listRaw,
-    items: listRaw.items ? JSON.parse(listRaw.items) : [], // Initialiser items si nécessaire
+    items: listRaw.items ? JSON.parse(listRaw.items) : [],
   } as ITodoList;
 
   if (!list.items || list.items.length === 0) {
